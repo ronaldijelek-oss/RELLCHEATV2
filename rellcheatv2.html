@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RELLCHEAT PRO</title>
+
+<style>
+
+/* RGB BACKGROUND */
+body{
+    font-family:Segoe UI;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:black;
+    color:white;
+}
+
+/* RGB Animated Border */
+@keyframes rgb{
+    0%{box-shadow:0 0 20px red;}
+    25%{box-shadow:0 0 20px purple;}
+    50%{box-shadow:0 0 20px blue;}
+    75%{box-shadow:0 0 20px cyan;}
+    100%{box-shadow:0 0 20px red;}
+}
+
+/* PANEL */
+.panel{
+    width:380px;
+    background:rgba(20,20,20,0.85);
+    border-radius:18px;
+    backdrop-filter:blur(15px);
+    padding:20px;
+    animation:rgb 6s infinite;
+}
+
+/* TITLE */
+.title{
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+    background:linear-gradient(45deg,#ff004c,#8a2eff,#00f7ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:20px;
+}
+
+/* TABS */
+.tabs{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.tab{
+    padding:8px 12px;
+    border-radius:10px;
+    background:#111;
+    cursor:pointer;
+    font-size:13px;
+    transition:0.3s;
+}
+
+.tab:hover{
+    background:#222;
+}
+
+.active{
+    background:linear-gradient(45deg,#ff004c,#8a2eff);
+}
+
+/* INPUT */
+input{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background:#111;
+    color:white;
+    margin:10px 0;
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(45deg,#ff004c,#8a2eff,#00f7ff);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* CHEAT ITEM */
+.item{
+    display:flex;
+    justify-content:space-between;
+    background:#111;
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+}
+
+/* TOGGLE */
+.switch{
+    position:relative;
+    width:50px;
+    height:24px;
+}
+
+.switch input{display:none;}
+
+.slider{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#333;
+    border-radius:20px;
+    transition:0.3s;
+}
+
+.slider:before{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:18px;
+    left:3px;
+    top:3px;
+    background:white;
+    border-radius:50%;
+    transition:0.3s;
+}
+
+input:checked + .slider{
+    background:linear-gradient(45deg,#ff004c,#8a2eff,#00f7ff);
+}
+
+input:checked + .slider:before{
+    transform:translateX(24px);
+}
+
+/* SLIDER AIM RATE */
+.rangeBox{
+    margin-top:15px;
+}
+
+.rangeBox input{
+    width:100%;
+}
+
+.value{
+    text-align:right;
+    font-size:13px;
+    color:#ff4dff;
+}
+
+.hidden{display:none;}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="panel" id="login">
+
+<div class="title">RELLCHEAT</div>
+
+<input id="user" placeholder="Username">
+<input id="pass" placeholder="Password" type="password">
+
+<button onclick="login()">LOGIN</button>
+
+</div>
+
+
+<!-- MOD MENU -->
+<div class="panel hidden" id="menu">
+
+<div class="title">RELLCHEAT MOD</div>
+
+<input placeholder="Masukkan ID Game">
+
+<!-- TAB MENU -->
+<div class="tabs">
+<div class="tab active" onclick="showTab('combat',this)">Combat</div>
+<div class="tab" onclick="showTab('player',this)">Player</div>
+<div class="tab" onclick="showTab('visual',this)">Visual</div>
+<div class="tab" onclick="showTab('setting',this)">Setting</div>
+</div>
+
+<!-- COMBAT -->
+<div id="combat">
+
+<div class="item">AIMLOCK
+<label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="item">AUTO HS
+<label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="item">DRAG HS
+<label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="rangeBox">
+AIM RATE
+<div class="value" id="aimValue">50%</div>
+<input type="range" min="0" max="100" value="50" id="aimSlider">
+</div>
+
+</div>
+
+<!-- PLAYER -->
+<div id="player" class="hidden">
+
+<div class="item">BADAN HS
+<label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+<div class="item">HS 50%
+<label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+</div>
+
+<!-- VISUAL -->
+<div id="visual" class="hidden">
+
+<div class="item">ANTI BLACKLIST
+<label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+</div>
+
+<!-- SETTING -->
+<div id="setting" class="hidden">
+
+<div class="item">RGB MODE
+<label class="switch"><input type="checkbox"><span class="slider"></span></label>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* LOGIN */
+function login(){
+    if(
+        document.getElementById("user").value==="rell" &&
+        document.getElementById("pass").value==="06"
+    ){
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("menu").classList.remove("hidden");
+    }else{
+        alert("Login Salah");
+    }
+}
+
+/* TAB SWITCH */
+function showTab(tab,el){
+
+    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+    el.classList.add("active");
+
+    ["combat","player","visual","setting"].forEach(id=>{
+        document.getElementById(id).classList.add("hidden");
+    });
+
+    document.getElementById(tab).classList.remove("hidden");
+}
+
+/* AIM RATE */
+let slider=document.getElementById("aimSlider");
+let val=document.getElementById("aimValue");
+
+slider.oninput=function(){
+    val.innerHTML=this.value+"%";
+}
+
+</script>
+
+</body>
+</html>
